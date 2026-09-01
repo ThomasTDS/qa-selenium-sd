@@ -19,8 +19,13 @@ After(async function (this: CustomWorld, { result }) {
     return;
   }
   if (result?.status === Status.FAILED) {
-    const screenshot = await this.driver.takeScreenshot();
-    await this.attach(screenshot, 'base64:image/png');
+    try {
+      const screenshot = await this.driver.takeScreenshot();
+      await this.attach(screenshot, 'base64:image/png');
+    } catch {
+      // Se a sessão do browser já estiver travada, a captura de tela também trava.
+      // Não deixamos isso impedir a tentativa de encerrar o driver logo abaixo.
+    }
   }
   await this.driver.quit();
 });
