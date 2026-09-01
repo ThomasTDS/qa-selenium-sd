@@ -25,3 +25,12 @@ Then('devo ver a confirmação {string}', async function (this: CustomWorld, exp
   const title = await this.paymentPage.getOrderConfirmationTitle();
   assert.equal(title, expectedTitle);
 });
+
+When('eu tento pagar sem preencher os dados do cartão', async function (this: CustomWorld) {
+  await this.paymentPage.pay();
+});
+
+Then('o pedido não deve ser confirmado', async function (this: CustomWorld) {
+  const isConfirmed = await this.paymentPage.isOrderConfirmed();
+  assert.equal(isConfirmed, false);
+});

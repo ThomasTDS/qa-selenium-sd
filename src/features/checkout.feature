@@ -22,3 +22,16 @@ Feature: Checkout
 
     When eu excluo minha conta
     Then minha conta deve ser excluída com sucesso
+
+  Scenario: Tentar pagar sem preencher os dados do cartão
+    Given que crio e faço login com uma nova conta
+    And que estou na página de produtos
+    And que adicionei o produto "Blue Top" ao carrinho
+    When eu vou para o carrinho
+    And eu tento prosseguir para o checkout
+    And eu confirmo o pedido no checkout
+    And eu tento pagar sem preencher os dados do cartão
+    Then o pedido não deve ser confirmado
+
+    When eu excluo minha conta
+    Then minha conta deve ser excluída com sucesso

@@ -30,4 +30,8 @@ export class PaymentPage extends BasePage {
   async getOrderConfirmationTitle(): Promise<string> {
     return this.getText(ORDER_CONFIRMATION_TITLE);
   }
+
+  async isOrderConfirmed(): Promise<boolean> {
+    return this.isVisible(ORDER_CONFIRMATION_TITLE, 3000);
+  }
 }

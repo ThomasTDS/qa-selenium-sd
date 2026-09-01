@@ -1,7 +1,17 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import { strict as assert } from 'node:assert';
 import { CustomWorld } from '../support/world';
-import { generateTestAccount } from '../support/test-data';
+import { TestAccount, generateTestAccount } from '../support/test-data';
+
+const REQUIRED_FIELD_BY_LABEL: Record<string, keyof TestAccount> = {
+  endereço: 'address',
+  nome: 'firstName',
+  sobrenome: 'lastName',
+  estado: 'state',
+  cidade: 'city',
+  cep: 'zipcode',
+  telefone: 'mobileNumber',
+};
 
 When('eu me cadastro com um novo nome e email', async function (this: CustomWorld) {
   this.testAccount = generateTestAccount();
@@ -69,11 +79,15 @@ When('eu faço login com a conta que criei', async function (this: CustomWorld) 
   await this.loginPage.login(this.testAccount!.email, this.testAccount!.password);
 });
 
-When('eu tento confirmar o cadastro sem preencher o endereço', async function (this: CustomWorld) {
-  const incompleteAccount = { ...this.testAccount!, address: '' };
-  await this.signupPage.fillAccountInformation(incompleteAccount);
-  await this.signupPage.submit();
-});
+When(
+  'eu tento confirmar o cadastro sem preencher o campo {string}',
+  async function (this: CustomWorld, fieldLabel: string) {
+    const field = REQUIRED_FIELD_BY_LABEL[fieldLabel];
+    const incompleteAccount = { ...this.testAccount!, [field]: '' };
+    await this.signupPage.fillAccountInformation(incompleteAccount);
+    await this.signupPage.submit();
+  },
+);
 
 Then('minha conta não deve ser criada', async function (this: CustomWorld) {
   const isCreated = await this.signupPage.isAccountCreated();

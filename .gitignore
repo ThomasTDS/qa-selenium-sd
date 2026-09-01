@@ -4,3 +4,6 @@ reports/
 .env
 npm-debug.log*
 *.log
+
+# Anotações pessoais de sessão — não sobem pro repositório
+REGISTRO-SESSAO*.md

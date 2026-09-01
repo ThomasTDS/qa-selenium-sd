@@ -26,9 +26,19 @@ Feature: Cadastro de usuário
     And eu excluo minha conta
     Then minha conta deve ser excluída com sucesso
 
-  Scenario: Tentar cadastrar sem preencher um campo obrigatório
+  Scenario Outline: Tentar cadastrar sem preencher o campo obrigatório "<campo>"
     Given que estou na página inicial do Automation Exercise
     When eu acesso a página de login
     And eu me cadastro com um novo nome e email
-    And eu tento confirmar o cadastro sem preencher o endereço
+    And eu tento confirmar o cadastro sem preencher o campo "<campo>"
     Then minha conta não deve ser criada
+
+    Examples:
+      | campo     |
+      | nome      |
+      | sobrenome |
+      | endereço  |
+      | estado    |
+      | cidade    |
+      | cep       |
+      | telefone  |
