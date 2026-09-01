@@ -8,7 +8,7 @@ dotenv.config();
 setDefaultTimeout(30 * 1000);
 
 Before(async function (this: CustomWorld) {
-  this.driver = createDriver();
+  this.driver = await createDriver();
   this.initPages();
 });
 

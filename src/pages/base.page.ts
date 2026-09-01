@@ -27,6 +27,11 @@ export abstract class BasePage {
     await element.sendKeys(text);
   }
 
+  protected async select(locator: By, visibleText: string): Promise<void> {
+    const element = await this.find(locator);
+    await element.sendKeys(visibleText);
+  }
+
   protected async getText(locator: By): Promise<string> {
     const element = await this.find(locator);
     return element.getText();
