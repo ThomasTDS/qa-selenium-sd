@@ -1,9 +1,11 @@
-import { After, Before, Status } from '@cucumber/cucumber';
+import { After, Before, Status, setDefaultTimeout } from '@cucumber/cucumber';
 import * as dotenv from 'dotenv';
 import { createDriver } from '../config/driver.factory';
 import { CustomWorld } from './world';
 
 dotenv.config();
+
+setDefaultTimeout(30 * 1000);
 
 Before(async function (this: CustomWorld) {
   this.driver = createDriver();

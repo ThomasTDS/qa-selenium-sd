@@ -12,7 +12,13 @@ export abstract class BasePage {
   protected async click(locator: By): Promise<void> {
     const element = await this.find(locator);
     await this.driver.wait(until.elementIsVisible(element), DEFAULT_TIMEOUT);
-    await element.click();
+    await this.driver.executeScript('arguments[0].scrollIntoView({block: "center"});', element);
+    try {
+      await element.click();
+    } catch {
+      // Elementos como anúncios podem sobrepor o alvo e interceptar o clique nativo.
+      await this.driver.executeScript('arguments[0].click();', element);
+    }
   }
 
   protected async type(locator: By, text: string): Promise<void> {
