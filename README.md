@@ -9,9 +9,9 @@ Site alvo: [Automation Exercise](https://automationexercise.com)
 ## Cobertura atual
 
 - Login (formulários exibidos, tentativa de login inválida)
-- Carrinho (adicionar e remover produto)
+- Carrinho (adicionar produto, remover produto, carrinho vazio)
 - Checkout sem estar logado (bloqueio esperado)
-- Cadastro de usuário (criação e exclusão de conta)
+- Cadastro de usuário (criação e exclusão de conta, e-mail já existente, campo obrigatório em branco)
 - Checkout completo estando logado (carrinho → checkout → pagamento → confirmação do pedido)
 
 Cada cenário que cria uma conta de teste também a exclui ao final, para não deixar dados de teste acumulados no site.

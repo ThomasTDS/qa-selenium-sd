@@ -10,6 +10,7 @@ const LOGIN_ERROR_MESSAGE = By.css('.login-form p');
 const SIGNUP_NAME_INPUT = By.css('input[data-qa="signup-name"]');
 const SIGNUP_EMAIL_INPUT = By.css('input[data-qa="signup-email"]');
 const SIGNUP_BUTTON = By.css('button[data-qa="signup-button"]');
+const SIGNUP_ERROR_MESSAGE = By.css('.signup-form p');
 
 export class LoginPage extends BasePage {
   constructor(driver: WebDriver) {
@@ -38,5 +39,9 @@ export class LoginPage extends BasePage {
     await this.type(SIGNUP_NAME_INPUT, name);
     await this.type(SIGNUP_EMAIL_INPUT, email);
     await this.click(SIGNUP_BUTTON);
+  }
+
+  async getSignupErrorMessage(): Promise<string> {
+    return this.getText(SIGNUP_ERROR_MESSAGE);
   }
 }

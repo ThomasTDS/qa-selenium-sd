@@ -48,3 +48,34 @@ Given('que crio e faço login com uma nova conta', async function (this: CustomW
   await this.signupPage.submit();
   await this.signupPage.continueToHome();
 });
+
+When('eu saio da minha conta', async function (this: CustomWorld) {
+  await this.homePage.logout();
+});
+
+When('eu me cadastro novamente com o mesmo nome e email', async function (this: CustomWorld) {
+  await this.loginPage.signup(this.testAccount!.name, this.testAccount!.email);
+});
+
+Then(
+  'devo ver a mensagem de cadastro {string}',
+  async function (this: CustomWorld, expectedMessage: string) {
+    const message = await this.loginPage.getSignupErrorMessage();
+    assert.equal(message, expectedMessage);
+  },
+);
+
+When('eu faço login com a conta que criei', async function (this: CustomWorld) {
+  await this.loginPage.login(this.testAccount!.email, this.testAccount!.password);
+});
+
+When('eu tento confirmar o cadastro sem preencher o endereço', async function (this: CustomWorld) {
+  const incompleteAccount = { ...this.testAccount!, address: '' };
+  await this.signupPage.fillAccountInformation(incompleteAccount);
+  await this.signupPage.submit();
+});
+
+Then('minha conta não deve ser criada', async function (this: CustomWorld) {
+  const isCreated = await this.signupPage.isAccountCreated();
+  assert.equal(isCreated, false);
+});

@@ -22,4 +22,8 @@ export class HomePage extends BasePage {
   async isLoggedIn(): Promise<boolean> {
     return this.isVisible(LOGOUT_LINK);
   }
+
+  async logout(): Promise<void> {
+    await this.click(LOGOUT_LINK);
+  }
 }

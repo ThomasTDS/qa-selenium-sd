@@ -16,3 +16,7 @@ Feature: Carrinho de compras
     And eu vou para o carrinho
     When eu removo o produto "Blue Top" do carrinho
     Then o carrinho deve estar vazio
+
+  Scenario: Visualizar o carrinho vazio sem adicionar nenhum produto
+    When eu vou para o carrinho
+    Then o carrinho deve estar vazio
