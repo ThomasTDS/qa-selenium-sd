@@ -19,7 +19,7 @@ src/
 
 ## Pré-requisitos
 
-- Node.js 20+
+- Node.js 22, 24 ou 26+ (exigido pelo `@cucumber/cucumber`)
 - Google Chrome instalado (ou Microsoft Edge, veja `BROWSER` abaixo)
 
 ## Instalação
