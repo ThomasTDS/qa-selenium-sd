@@ -13,6 +13,9 @@ Before(async function (this: CustomWorld) {
 });
 
 After(async function (this: CustomWorld, { result }) {
+  if (!this.driver) {
+    return;
+  }
   if (result?.status === Status.FAILED) {
     const screenshot = await this.driver.takeScreenshot();
     await this.attach(screenshot, 'base64:image/png');

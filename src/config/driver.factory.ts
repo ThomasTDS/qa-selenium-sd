@@ -9,10 +9,14 @@ const BLOCKED_AD_URL_PATTERNS = [
   '*google.com/pagead*',
 ];
 
+// Necessários para o Chromium (base do Chrome e do Edge) rodar em containers de CI,
+// onde o sandbox padrão do navegador não tem permissão para inicializar.
+const CI_HARDENING_ARGS = ['--no-sandbox', '--disable-dev-shm-usage'];
+
 export async function createDriver(): Promise<WebDriver> {
   const browser = process.env.BROWSER ?? 'chrome';
   const headless = process.env.HEADLESS === 'true';
-  const windowSizeArg = '--window-size=1366,768';
+  const commonArgs = [...CI_HARDENING_ARGS, '--window-size=1366,768'];
 
   let driver: WebDriver;
   if (browser === 'edge') {
@@ -20,14 +24,14 @@ export async function createDriver(): Promise<WebDriver> {
     if (headless) {
       edgeOptions.addArguments('--headless=new');
     }
-    edgeOptions.addArguments(windowSizeArg);
+    edgeOptions.addArguments(...commonArgs);
     driver = await new Builder().forBrowser('MicrosoftEdge').setEdgeOptions(edgeOptions).build();
   } else {
     const chromeOptions = new chrome.Options();
     if (headless) {
       chromeOptions.addArguments('--headless=new');
     }
-    chromeOptions.addArguments(windowSizeArg);
+    chromeOptions.addArguments(...commonArgs);
     driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
   }
 
