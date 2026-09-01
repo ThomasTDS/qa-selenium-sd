@@ -72,3 +72,7 @@ Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/wo
 
 - O site alvo é monetizado com anúncios que podem sobrepor elementos e até interceptar navegações (interstitials). Para evitar flakiness, o `driver.factory.ts` bloqueia os domínios de anúncio via Chrome DevTools Protocol (CDP) logo após criar o driver.
 - `BasePage.click()` faz scroll até o elemento e, se o clique nativo for interceptado, tenta um clique via JavaScript como fallback.
+
+## Bug reports
+
+Bugs reais encontrados durante o desenvolvimento (na aplicação sob teste, na infraestrutura de CI ou no próprio código de automação) são documentados como [Issues](https://github.com/ThomasTDS/qa-selenium-sd/issues?q=is%3Aissue+label%3Abug) usando o [template de bug report](.github/ISSUE_TEMPLATE/bug_report.md), com passos para reproduzir, evidências, causa raiz e a correção aplicada.
