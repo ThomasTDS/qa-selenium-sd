@@ -6,6 +6,16 @@ Testes end-to-end usando **Selenium WebDriver**, **TypeScript** e **Cucumber** (
 
 Site alvo: [Automation Exercise](https://automationexercise.com)
 
+## Cobertura atual
+
+- Login (formulários exibidos, tentativa de login inválida)
+- Carrinho (adicionar e remover produto)
+- Checkout sem estar logado (bloqueio esperado)
+- Cadastro de usuário (criação e exclusão de conta)
+- Checkout completo estando logado (carrinho → checkout → pagamento → confirmação do pedido)
+
+Cada cenário que cria uma conta de teste também a exclui ao final, para não deixar dados de teste acumulados no site.
+
 ## Estrutura do projeto
 
 ```
@@ -56,3 +66,8 @@ npm run format
 ## Integração contínua
 
 Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml), que instala as dependências, roda lint, type-check e a suíte de testes em modo headless no Chrome, publicando o relatório como artefato do job.
+
+## Notas técnicas
+
+- O site alvo é monetizado com anúncios que podem sobrepor elementos e até interceptar navegações (interstitials). Para evitar flakiness, o `driver.factory.ts` bloqueia os domínios de anúncio via Chrome DevTools Protocol (CDP) logo após criar o driver.
+- `BasePage.click()` faz scroll até o elemento e, se o clique nativo for interceptado, tenta um clique via JavaScript como fallback.
