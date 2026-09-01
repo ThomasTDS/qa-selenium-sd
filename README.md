@@ -68,7 +68,7 @@ npm run format
 
 ## Integração contínua
 
-Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml): um job `quality` roda lint e type-check e, se passar, um job `e2e` roda a suíte completa em modo headless numa matrix (Chrome e Edge), publicando o relatório de cada browser como artefato do job.
+Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml): um job `quality` roda lint e type-check e, se passar, um job `e2e` roda a suíte completa em modo headless no Chrome, publicando o relatório como artefato do job. O Edge continua suportado para execução local (veja `BROWSER` acima), mas foi removido da matrix de CI por instabilidade recorrente no runner — detalhes na Issue de bug report correspondente.
 
 ## Notas técnicas
 

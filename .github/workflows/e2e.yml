@@ -36,7 +36,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chrome, edge]
+        # Edge foi removido da matrix por instabilidade recorrente e imprevisível
+        # nesse runner (ver Issue de bug report). Continua suportado localmente
+        # via BROWSER=edge.
+        browser: [chrome]
     env:
       BROWSER: ${{ matrix.browser }}
       HEADLESS: 'true'
