@@ -3,6 +3,7 @@ Feature: Cadastro de usuário
   Eu quero criar uma conta
   Para acessar funcionalidades exclusivas de usuários cadastrados
 
+  @TC-009 @smoke
   Scenario: Criar uma nova conta com sucesso
     Given que estou na página inicial do Automation Exercise
     When eu acesso a página de login
@@ -16,6 +17,7 @@ Feature: Cadastro de usuário
     When eu excluo minha conta
     Then minha conta deve ser excluída com sucesso
 
+  @TC-010
   Scenario: Tentar cadastrar com um e-mail já existente
     Given que crio e faço login com uma nova conta
     When eu saio da minha conta
@@ -26,6 +28,7 @@ Feature: Cadastro de usuário
     And eu excluo minha conta
     Then minha conta deve ser excluída com sucesso
 
+  @TC-011
   Scenario Outline: Tentar cadastrar sem preencher o campo obrigatório "<campo>"
     Given que estou na página inicial do Automation Exercise
     When eu acesso a página de login

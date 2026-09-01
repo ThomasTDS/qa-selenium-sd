@@ -17,6 +17,8 @@ Site alvo: [Automation Exercise](https://automationexercise.com)
 
 Cada cenário que cria uma conta de teste também a exclui ao final, para não deixar dados de teste acumulados no site.
 
+Cada cenário é identificado e rastreável via tag `@TC-XXX`, listados em [`docs/test-cases.md`](docs/test-cases.md) junto com módulo, tipo, prioridade e status de automação. Os fluxos ponta-a-ponta mais críticos têm a tag `@smoke` (`npx cucumber-js --tags @smoke`).
+
 ## Estrutura do projeto
 
 ```
