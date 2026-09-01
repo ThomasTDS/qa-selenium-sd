@@ -1,8 +1,7 @@
 import { By, WebDriver } from 'selenium-webdriver';
 import { BasePage } from './base.page';
 
-const BASE_URL = process.env.BASE_URL ?? 'https://automationexercise.com';
-
+const DELETE_ACCOUNT_LINK = By.css('a[href="/delete_account"]');
 const ACCOUNT_DELETED_TITLE = By.css('[data-qa="account-deleted"]');
 
 export class AccountPage extends BasePage {
@@ -11,7 +10,7 @@ export class AccountPage extends BasePage {
   }
 
   async deleteAccount(): Promise<void> {
-    await this.open(`${BASE_URL}/delete_account`);
+    await this.click(DELETE_ACCOUNT_LINK);
   }
 
   async isAccountDeleted(): Promise<boolean> {
