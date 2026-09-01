@@ -7,7 +7,9 @@ dotenv.config();
 
 setDefaultTimeout(30 * 1000);
 
-Before(async function (this: CustomWorld) {
+// Timeout maior que o padrão (30s): criar o driver envolve subir o browser do
+// zero e, em CI, o primeiro cold-start pode ser mais lento que uma navegação comum.
+Before({ timeout: 60 * 1000 }, async function (this: CustomWorld) {
   this.driver = await createDriver();
   this.initPages();
 });
