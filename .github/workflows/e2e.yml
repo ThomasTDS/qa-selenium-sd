@@ -8,13 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  e2e:
+  quality:
     runs-on: ubuntu-latest
-    env:
-      BROWSER: chrome
-      HEADLESS: 'true'
-      BASE_URL: https://automationexercise.com
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,6 +29,31 @@ jobs:
       - name: Type-check
         run: npx tsc --noEmit
 
+  e2e:
+    needs: quality
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, edge]
+    env:
+      BROWSER: ${{ matrix.browser }}
+      HEADLESS: 'true'
+      BASE_URL: https://automationexercise.com
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Run E2E tests
         run: npm test
 
@@ -41,6 +61,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cucumber-report
+          name: cucumber-report-${{ matrix.browser }}
           path: reports/
           retention-days: 7

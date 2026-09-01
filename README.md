@@ -11,8 +11,9 @@ Site alvo: [Automation Exercise](https://automationexercise.com)
 - Login (formulários exibidos, tentativa de login inválida)
 - Carrinho (adicionar produto, remover produto, carrinho vazio)
 - Checkout sem estar logado (bloqueio esperado)
-- Cadastro de usuário (criação e exclusão de conta, e-mail já existente, campo obrigatório em branco)
+- Cadastro de usuário (criação e exclusão de conta, e-mail já existente, e 7 campos obrigatórios em branco via `Scenario Outline`)
 - Checkout completo estando logado (carrinho → checkout → pagamento → confirmação do pedido)
+- Tentativa de pagamento sem preencher os dados do cartão (bloqueio esperado)
 
 Cada cenário que cria uma conta de teste também a exclui ao final, para não deixar dados de teste acumulados no site.
 
@@ -65,7 +66,7 @@ npm run format
 
 ## Integração contínua
 
-Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml), que instala as dependências, roda lint, type-check e a suíte de testes em modo headless no Chrome, publicando o relatório como artefato do job.
+Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml): um job `quality` roda lint e type-check e, se passar, um job `e2e` roda a suíte completa em modo headless numa matrix (Chrome e Edge), publicando o relatório de cada browser como artefato do job.
 
 ## Notas técnicas
 
