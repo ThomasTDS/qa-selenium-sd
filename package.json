@@ -2,7 +2,14 @@
   "name": "qa-selenium-sd",
   "version": "1.0.0",
   "description": "Testes E2E em Selenium WebDriver + TypeScript + Cucumber (BDD), seguindo Page Object Model",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasTDS/qa-selenium-sd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThomasTDS/qa-selenium-sd/issues"
+  },
+  "homepage": "https://github.com/ThomasTDS/qa-selenium-sd#readme",
   "scripts": {
     "test": "cucumber-js",
     "test:headless": "cross-env HEADLESS=true cucumber-js",
@@ -16,8 +23,8 @@
     "cucumber",
     "typescript"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Thomas Teixeira",
+  "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
     "@cucumber/cucumber": "^13.2.1",
