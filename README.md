@@ -2,6 +2,8 @@
 
 [![E2E Tests](https://github.com/ThomasTDS/qa-selenium-sd/actions/workflows/e2e.yml/badge.svg)](https://github.com/ThomasTDS/qa-selenium-sd/actions/workflows/e2e.yml)
 
+[Último relatório de testes publicado](https://thomastds.github.io/qa-selenium-sd/)
+
 Testes end-to-end usando **Selenium WebDriver**, **TypeScript** e **Cucumber** (BDD), seguindo o padrão **Page Object Model (POM)**.
 
 Site alvo: [Automation Exercise](https://automationexercise.com)
@@ -69,6 +71,8 @@ npm run format
 ## Integração contínua
 
 Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml): um job `quality` roda lint e type-check e, se passar, um job `e2e` roda a suíte completa em modo headless no Chrome, publicando o relatório como artefato do job. O Edge continua suportado para execução local (veja `BROWSER` acima), mas foi removido da matrix de CI por instabilidade recorrente no runner — detalhes na Issue de bug report correspondente.
+
+Em todo push direto para `master` (não em pull requests), um terceiro job publica o relatório HTML mais recente no GitHub Pages: [thomastds.github.io/qa-selenium-sd](https://thomastds.github.io/qa-selenium-sd/).
 
 ## Notas técnicas
 

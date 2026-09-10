@@ -68,3 +68,36 @@ jobs:
           name: cucumber-report-${{ matrix.browser }}
           path: reports/
           retention-days: 7
+
+  publish-report:
+    needs: e2e
+    if: always() && github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download test report
+        uses: actions/download-artifact@v4
+        with:
+          name: cucumber-report-chrome
+          path: reports
+
+      - name: Prepare Pages content
+        run: cp reports/cucumber-report.html reports/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: reports
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
