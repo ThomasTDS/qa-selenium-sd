@@ -69,6 +69,20 @@ jobs:
           path: reports/
           retention-days: 7
 
+  docker:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t qa-selenium-sd .
+
+      - name: Run suite inside the container
+        run: docker run --rm qa-selenium-sd
+
   publish-report:
     needs: e2e
     if: always() && github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')

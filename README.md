@@ -55,6 +55,17 @@ Relatórios são gerados em `reports/` (HTML e JSON).
 
 A suíte roda em 2 workers em paralelo (configurado em `cucumber.js`), reduzindo o tempo total de execução em quase a metade sem abrir muitas sessões de browser simultâneas.
 
+### Rodando via Docker
+
+Não precisa de Node nem Chrome instalados localmente — só Docker:
+
+```bash
+docker build -t qa-selenium-sd .
+docker run --rm qa-selenium-sd
+```
+
+A imagem já vem com o Google Chrome instalado e as variáveis `BROWSER=chrome`/`HEADLESS=true` configuradas.
+
 ### Variáveis de ambiente (`.env`)
 
 | Variável   | Padrão                          | Descrição                          |
@@ -83,6 +94,8 @@ Aplicado via [commitlint](https://commitlint.js.org/) + [husky](https://typicode
 Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml): um job `quality` roda lint e type-check e, se passar, um job `e2e` roda a suíte completa em modo headless no Chrome, publicando o relatório como artefato do job. O Edge continua suportado para execução local (veja `BROWSER` acima), mas foi removido da matrix de CI por instabilidade recorrente no runner — detalhes na Issue de bug report correspondente.
 
 Em todo push direto para `master` (não em pull requests), um terceiro job publica o relatório HTML mais recente no GitHub Pages: [thomastds.github.io/qa-selenium-sd](https://thomastds.github.io/qa-selenium-sd/).
+
+Um job `docker` (disparado manualmente via `workflow_dispatch`, não em todo push) builda a imagem e roda a suíte dentro do container, validando que o `Dockerfile` continua funcionando.
 
 ## Notas técnicas
 
