@@ -53,6 +53,8 @@ npm run test:headless # em modo headless
 
 Relatórios são gerados em `reports/` (HTML e JSON).
 
+A suíte roda em 2 workers em paralelo (configurado em `cucumber.js`), reduzindo o tempo total de execução em quase a metade sem abrir muitas sessões de browser simultâneas.
+
 ### Variáveis de ambiente (`.env`)
 
 | Variável   | Padrão                          | Descrição                          |
