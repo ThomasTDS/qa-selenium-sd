@@ -70,7 +70,10 @@ jobs:
           retention-days: 7
 
   docker:
-    if: github.event_name == 'workflow_dispatch'
+    # Roda depois do e2e (não em paralelo) para não dobrar a carga simultânea
+    # sobre o site alvo — ver bug de bot-detection do Cloudflare na Issue #15.
+    needs: e2e
+    if: always() && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
