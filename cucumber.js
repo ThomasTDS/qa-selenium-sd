@@ -14,5 +14,9 @@ module.exports = {
     // de forma intermitente. Retry absorve essa flakiness de ambiente sem
     // mascarar falhas reais (uma regressão de verdade falha em todas as tentativas).
     retry: 2,
+    // 2 workers: reduz o tempo total da suíte sem abrir muitas sessões de
+    // browser simultâneas (cada uma consome CPU/memória, e mais conexões
+    // concorrentes do mesmo IP podem alimentar o bot-detection do Cloudflare).
+    parallel: 2,
   },
 };
