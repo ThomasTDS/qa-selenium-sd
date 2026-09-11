@@ -78,6 +78,7 @@ Em todo push direto para `master` (não em pull requests), um terceiro job publi
 
 - O site alvo é monetizado com anúncios que podem sobrepor elementos e até interceptar navegações (interstitials). Para evitar flakiness, o `driver.factory.ts` bloqueia os domínios de anúncio via Chrome DevTools Protocol (CDP) logo após criar o driver.
 - `BasePage.click()` faz scroll até o elemento e, se o clique nativo for interceptado, tenta um clique via JavaScript como fallback.
+- O site alvo fica atrás do Cloudflare, que ocasionalmente trata o IP de datacenter dos runners de CI como suspeito, causando falhas intermitentes que não reproduzem localmente. O `cucumber.js` configura `retry: 2` para absorver essa flakiness de ambiente sem mascarar regressões reais (que falham em todas as tentativas).
 
 ## Bug reports
 
