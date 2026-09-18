@@ -105,6 +105,8 @@ Um job `docker` (disparado manualmente via `workflow_dispatch`, não em todo pus
 
 O [Dependabot](.github/dependabot.yml) verifica semanalmente atualizações das dependências do `npm` e das actions usadas no workflow de CI, abrindo um pull request para cada atualização disponível.
 
+Bumps major do TypeScript são ignorados: o `@typescript-eslint/eslint-plugin` atual só suporta até a versão 6.1, então uma versão major nova quebraria a instalação. A regra sai do `dependabot.yml` quando essa dependência acompanhar.
+
 ## Notas técnicas
 
 - O site alvo é monetizado com anúncios que podem sobrepor elementos e até interceptar navegações (interstitials). Para evitar flakiness, o `driver.factory.ts` bloqueia os domínios de anúncio via Chrome DevTools Protocol (CDP) logo após criar o driver.

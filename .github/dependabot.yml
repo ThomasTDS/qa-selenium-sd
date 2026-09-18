@@ -9,6 +9,11 @@ updates:
       - "dependencies"
     commit-message:
       prefix: "chore"
+    ignore:
+      # @typescript-eslint/eslint-plugin ainda exige typescript <6.1; um bump
+      # major do TypeScript quebra o npm ci até essa dependência acompanhar.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
