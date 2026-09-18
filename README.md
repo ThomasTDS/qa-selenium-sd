@@ -101,6 +101,8 @@ Em todo push direto para `master` (não em pull requests), um terceiro job publi
 
 Um job `docker` (disparado manualmente via `workflow_dispatch`, não em todo push) builda a imagem e roda a suíte dentro do container, validando que o `Dockerfile` continua funcionando.
 
+A `master` é protegida: só recebe mudanças via pull request, com os checks `quality` e `e2e (chrome)` passando e a branch atualizada em relação à `master`.
+
 ## Manutenção de dependências
 
 O [Dependabot](.github/dependabot.yml) verifica semanalmente atualizações das dependências do `npm` e das actions usadas no workflow de CI, abrindo um pull request para cada atualização disponível.
