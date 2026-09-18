@@ -5,6 +5,6 @@ reports/
 npm-debug.log*
 *.log
 
-# Anotações pessoais de sessão — não sobem pro repositório
-REGISTRO-SESSAO*.md
+# Anotações pessoais — não sobem pro repositório
+Decisões do Projeto.md
 PROMPT-QA-DOCS.md
