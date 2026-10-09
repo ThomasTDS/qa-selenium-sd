@@ -1,6 +1,7 @@
 import { After, Before, Status, setDefaultTimeout } from '@cucumber/cucumber';
 import * as dotenv from 'dotenv';
 import { createDriver } from '../config/driver.factory';
+import { deleteAccount } from './api-client';
 import { CustomWorld } from './world';
 
 dotenv.config();
@@ -28,4 +29,23 @@ After(async function (this: CustomWorld, { result }) {
     }
   }
   await this.driver.quit();
+});
+
+// Exclui via API a conta criada pelo cenário, mesmo que ele tenha falhado antes
+// de chegar ao passo de exclusão. Se o cenário já excluiu a conta pela interface,
+// a API responde 404 e não há nada a fazer.
+After(async function (this: CustomWorld) {
+  if (!this.testAccount) {
+    return;
+  }
+  const { email, password } = this.testAccount;
+  try {
+    const { responseCode, message } = await deleteAccount(email, password);
+    if (responseCode !== 200 && responseCode !== 404) {
+      this.log(`Limpeza: não foi possível excluir a conta ${email} (${responseCode}: ${message})`);
+    }
+  } catch (error) {
+    // Uma falha na limpeza não deve mudar o resultado do cenário, só ficar registrada.
+    this.log(`Limpeza: erro ao excluir a conta ${email}: ${String(error)}`);
+  }
 });

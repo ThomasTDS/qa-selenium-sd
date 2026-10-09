@@ -24,10 +24,6 @@ Feature: Cadastro de usuário
     And eu me cadastro novamente com o mesmo nome e email
     Then devo ver a mensagem de cadastro "Email Address already exist!"
 
-    When eu faço login com a conta que criei
-    And eu excluo minha conta
-    Then minha conta deve ser excluída com sucesso
-
   @TC-011
   Scenario Outline: Tentar cadastrar sem preencher o campo obrigatório "<campo>"
     Given que estou na página inicial do Automation Exercise
