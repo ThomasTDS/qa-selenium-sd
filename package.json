@@ -30,7 +30,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
-    "@commitlint/config-conventional": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.3",
     "@cucumber/cucumber": "^13.2.1",
     "@types/node": "^26.6.2",
     "@types/selenium-webdriver": "^4.35.7",
