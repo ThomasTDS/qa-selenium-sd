@@ -17,7 +17,7 @@ Site alvo: [Automation Exercise](https://automationexercise.com)
 - Checkout completo estando logado (carrinho → checkout → pagamento → confirmação do pedido)
 - Tentativa de pagamento sem preencher os dados do cartão (bloqueio esperado)
 
-Toda conta de teste criada é excluída ao final do cenário por um hook `After` que chama a API do site (`DELETE /api/deleteAccount`). Como o hook roda mesmo quando o cenário falha, nenhuma conta fica acumulada no site. O cenário de cadastro (`@TC-009`) continua excluindo a conta pela interface, porque a exclusão faz parte do que ele testa.
+Quando a conta é só pré-condição (checkout, e-mail já existente), ela é criada pela API (`POST /api/createAccount`) em vez do formulário, o que deixa o cenário mais rápido e menos frágil. Toda conta de teste criada é excluída ao final do cenário por um hook `After` que chama a API do site (`DELETE /api/deleteAccount`). Como o hook roda mesmo quando o cenário falha, nenhuma conta fica acumulada no site. O cenário de cadastro (`@TC-009`) continua excluindo a conta pela interface, porque a exclusão faz parte do que ele testa.
 
 Cada cenário é identificado e rastreável via tag `@TC-XXX`, listados em [`docs/test-cases.md`](docs/test-cases.md) junto com módulo, tipo, prioridade e status de automação. Os fluxos ponta-a-ponta mais críticos têm a tag `@smoke` (`npx cucumber-js --tags @smoke`).
 
@@ -29,7 +29,7 @@ src/
 ├── pages/      # page objects
 ├── features/   # especificações em Gherkin (.feature)
 ├── steps/      # step definitions
-└── support/    # world e hooks do Cucumber
+└── support/    # world e hooks do Cucumber, dados de teste e cliente da API do site
 ```
 
 ## Pré-requisitos

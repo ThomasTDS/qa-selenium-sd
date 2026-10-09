@@ -1,5 +1,6 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import { strict as assert } from 'node:assert';
+import { createAccount } from '../support/api-client';
 import { CustomWorld } from '../support/world';
 import { TestAccount, generateTestAccount } from '../support/test-data';
 
@@ -49,14 +50,19 @@ Then('minha conta deve ser excluída com sucesso', async function (this: CustomW
   assert.equal(isDeleted, true);
 });
 
+// A conta é só pré-condição aqui, então é criada pela API (mais rápido e com
+// menos pontos de falha). O cadastro pela interface é coberto pelo TC-009.
 Given('que crio e faço login com uma nova conta', async function (this: CustomWorld) {
+  // Atribuído antes da chamada para o hook de limpeza excluir a conta mesmo
+  // que algo falhe depois da criação.
   this.testAccount = generateTestAccount();
+  const { responseCode, message } = await createAccount(this.testAccount);
+  assert.equal(responseCode, 201, `Falha ao criar a conta de teste via API: ${message}`);
+
   await this.homePage.goto();
   await this.homePage.goToLoginPage();
-  await this.loginPage.signup(this.testAccount.name, this.testAccount.email);
-  await this.signupPage.fillAccountInformation(this.testAccount);
-  await this.signupPage.submit();
-  await this.signupPage.continueToHome();
+  await this.loginPage.login(this.testAccount.email, this.testAccount.password);
+  assert.equal(await this.homePage.isLoggedIn(), true, 'Login com a conta criada via API falhou');
 });
 
 When('eu saio da minha conta', async function (this: CustomWorld) {
