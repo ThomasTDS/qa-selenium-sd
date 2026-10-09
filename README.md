@@ -17,7 +17,7 @@ Site alvo: [Automation Exercise](https://automationexercise.com)
 - Checkout completo estando logado (carrinho → checkout → pagamento → confirmação do pedido)
 - Tentativa de pagamento sem preencher os dados do cartão (bloqueio esperado)
 
-Cada cenário que cria uma conta de teste também a exclui ao final, para não deixar dados de teste acumulados no site.
+Toda conta de teste criada é excluída ao final do cenário por um hook `After` que chama a API do site (`DELETE /api/deleteAccount`). Como o hook roda mesmo quando o cenário falha, nenhuma conta fica acumulada no site. O cenário de cadastro (`@TC-009`) continua excluindo a conta pela interface, porque a exclusão faz parte do que ele testa.
 
 Cada cenário é identificado e rastreável via tag `@TC-XXX`, listados em [`docs/test-cases.md`](docs/test-cases.md) junto com módulo, tipo, prioridade e status de automação. Os fluxos ponta-a-ponta mais críticos têm a tag `@smoke` (`npx cucumber-js --tags @smoke`).
 
