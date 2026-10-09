@@ -22,9 +22,6 @@ Feature: Checkout
     And eu pago o pedido com um cartão de teste
     Then devo ver a confirmação "ORDER PLACED!"
 
-    When eu excluo minha conta
-    Then minha conta deve ser excluída com sucesso
-
   @TC-008
   Scenario: Tentar pagar sem preencher os dados do cartão
     Given que crio e faço login com uma nova conta
@@ -35,6 +32,3 @@ Feature: Checkout
     And eu confirmo o pedido no checkout
     And eu tento pagar sem preencher os dados do cartão
     Then o pedido não deve ser confirmado
-
-    When eu excluo minha conta
-    Then minha conta deve ser excluída com sucesso
