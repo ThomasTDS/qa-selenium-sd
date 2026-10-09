@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 export interface TestAccount {
   name: string;
   email: string;
@@ -12,8 +14,10 @@ export interface TestAccount {
   mobileNumber: string;
 }
 
+// UUID em vez de Date.now(): com a suíte rodando em paralelo, dois cenários
+// podem gerar a conta no mesmo milissegundo e acabar com o mesmo e-mail.
 export function generateTestAccount(): TestAccount {
-  const uniqueId = Date.now();
+  const uniqueId = randomUUID();
   return {
     name: 'QA Selenium',
     email: `qa.selenium.${uniqueId}@example.com`,
