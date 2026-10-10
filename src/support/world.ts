@@ -11,6 +11,7 @@ import { PaymentPage } from '../pages/payment.page';
 import { ProductDetailsPage } from '../pages/product-details.page';
 import { ProductsPage } from '../pages/products.page';
 import { SignupPage } from '../pages/signup.page';
+import { ApiResponse } from './api-client';
 import { TestAccount } from './test-data';
 
 export class CustomWorld extends World {
@@ -27,6 +28,7 @@ export class CustomWorld extends World {
   contactPage!: ContactPage;
   newsletter!: NewsletterComponent;
   testAccount?: TestAccount;
+  apiResponse?: ApiResponse;
 
   constructor(options: IWorldOptions) {
     super(options);

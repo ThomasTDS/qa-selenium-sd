@@ -13,6 +13,7 @@
   "scripts": {
     "test": "cucumber-js",
     "test:headless": "cross-env HEADLESS=true cucumber-js",
+    "test:api": "cucumber-js --tags @api",
     "lint": "eslint src",
     "format": "prettier --write \"src/**/*.ts\"",
     "changelog": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -o CHANGELOG.md -r 0 -u",
