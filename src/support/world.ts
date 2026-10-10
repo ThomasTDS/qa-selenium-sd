@@ -3,6 +3,7 @@ import { WebDriver } from 'selenium-webdriver';
 import { AccountPage } from '../pages/account.page';
 import { CartPage } from '../pages/cart.page';
 import { CheckoutPage } from '../pages/checkout.page';
+import { ContactPage } from '../pages/contact.page';
 import { HomePage } from '../pages/home.page';
 import { LoginPage } from '../pages/login.page';
 import { PaymentPage } from '../pages/payment.page';
@@ -22,6 +23,7 @@ export class CustomWorld extends World {
   checkoutPage!: CheckoutPage;
   paymentPage!: PaymentPage;
   accountPage!: AccountPage;
+  contactPage!: ContactPage;
   testAccount?: TestAccount;
 
   constructor(options: IWorldOptions) {
@@ -38,6 +40,7 @@ export class CustomWorld extends World {
     this.checkoutPage = new CheckoutPage(this.driver);
     this.paymentPage = new PaymentPage(this.driver);
     this.accountPage = new AccountPage(this.driver);
+    this.contactPage = new ContactPage(this.driver);
   }
 }
 

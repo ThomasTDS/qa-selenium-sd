@@ -22,6 +22,9 @@ Cada test case referencia o `.feature` correspondente via tag (`@TC-XXX`) para r
 | TC-016 | Produtos | Ver os detalhes de um produto                                       | Funcional | Média      | Automatizado | `products.feature` `@TC-016`                   |
 | TC-017 | Carrinho | Adicionar um produto com quantidade maior que 1                     | Funcional | Alta       | Automatizado | `cart.feature` `@TC-017`                       |
 | TC-018 | Carrinho | Adicionar o mesmo produto duas vezes soma as quantidades            | Funcional | Média      | Automatizado | `cart.feature` `@TC-018`                       |
+| TC-019 | Contato  | Enviar uma mensagem de contato com anexo                            | Funcional | Média      | Automatizado | `contact.feature` `@TC-019`                    |
+| TC-020 | Contato  | Cancelar o envio no diálogo de confirmação                          | Negativo  | Baixa      | Automatizado | `contact.feature` `@TC-020`                    |
+| TC-021 | Contato  | Tentar enviar a mensagem sem preencher o e-mail                     | Negativo  | Média      | Automatizado | `contact.feature` `@TC-021`                    |
 
 ## Legenda
 

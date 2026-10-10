@@ -50,3 +50,19 @@ export function generateTestCard(): TestCard {
     expiryYear: '2030',
   };
 }
+
+export interface ContactMessage {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export function generateContactMessage(): ContactMessage {
+  return {
+    name: 'QA Selenium',
+    email: `qa.selenium.${randomUUID()}@example.com`,
+    subject: 'Mensagem de teste automatizado',
+    message: 'Mensagem enviada pelo teste E2E do formulário de contato.',
+  };
+}
