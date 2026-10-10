@@ -6,6 +6,7 @@ import { CheckoutPage } from '../pages/checkout.page';
 import { ContactPage } from '../pages/contact.page';
 import { HomePage } from '../pages/home.page';
 import { LoginPage } from '../pages/login.page';
+import { NewsletterComponent } from '../pages/newsletter.component';
 import { PaymentPage } from '../pages/payment.page';
 import { ProductDetailsPage } from '../pages/product-details.page';
 import { ProductsPage } from '../pages/products.page';
@@ -24,6 +25,7 @@ export class CustomWorld extends World {
   paymentPage!: PaymentPage;
   accountPage!: AccountPage;
   contactPage!: ContactPage;
+  newsletter!: NewsletterComponent;
   testAccount?: TestAccount;
 
   constructor(options: IWorldOptions) {
@@ -41,6 +43,7 @@ export class CustomWorld extends World {
     this.paymentPage = new PaymentPage(this.driver);
     this.accountPage = new AccountPage(this.driver);
     this.contactPage = new ContactPage(this.driver);
+    this.newsletter = new NewsletterComponent(this.driver);
   }
 }
 

@@ -25,6 +25,8 @@ Cada test case referencia o `.feature` correspondente via tag (`@TC-XXX`) para r
 | TC-019 | Contato  | Enviar uma mensagem de contato com anexo                            | Funcional | Média      | Automatizado | `contact.feature` `@TC-019`                    |
 | TC-020 | Contato  | Cancelar o envio no diálogo de confirmação                          | Negativo  | Baixa      | Automatizado | `contact.feature` `@TC-020`                    |
 | TC-021 | Contato  | Tentar enviar a mensagem sem preencher o e-mail                     | Negativo  | Média      | Automatizado | `contact.feature` `@TC-021`                    |
+| TC-022 | Newsletter | Assinar a newsletter a partir de uma página (2 variações)         | Funcional | Baixa      | Automatizado | `newsletter.feature` `@TC-022` (Scenario Outline) |
+| TC-023 | Newsletter | Tentar assinar a newsletter com um e-mail inválido                | Negativo  | Baixa      | Automatizado | `newsletter.feature` `@TC-023`                 |
 
 ## Legenda
 
