@@ -27,6 +27,17 @@ Cada test case referencia o `.feature` correspondente via tag (`@TC-XXX`) para r
 | TC-021 | Contato  | Tentar enviar a mensagem sem preencher o e-mail                     | Negativo  | Média      | Automatizado | `contact.feature` `@TC-021`                    |
 | TC-022 | Newsletter | Assinar a newsletter a partir de uma página (2 variações)         | Funcional | Baixa      | Automatizado | `newsletter.feature` `@TC-022` (Scenario Outline) |
 | TC-023 | Newsletter | Tentar assinar a newsletter com um e-mail inválido                | Negativo  | Baixa      | Automatizado | `newsletter.feature` `@TC-023`                 |
+| TC-024 | API      | Listar todos os produtos | Funcional | Alta | Automatizado | `api.feature` `@TC-024` |
+| TC-025 | API      | Listar todas as marcas | Funcional | Média | Automatizado | `api.feature` `@TC-025` |
+| TC-026 | API      | Recusar métodos não suportados (3 variações) | Negativo | Média | Automatizado | `api.feature` `@TC-026` (Scenario Outline) |
+| TC-027 | API      | Buscar produtos por um termo | Funcional | Alta | Automatizado | `api.feature` `@TC-027` |
+| TC-028 | API      | Buscar produtos sem informar o termo | Negativo | Média | Automatizado | `api.feature` `@TC-028` |
+| TC-029 | API      | Verificar o login com credenciais válidas | Funcional | Alta | Automatizado | `api.feature` `@TC-029` |
+| TC-030 | API      | Verificar o login com a senha errada | Negativo | Alta | Automatizado | `api.feature` `@TC-030` |
+| TC-031 | API      | Verificar o login sem informar o e-mail | Negativo | Média | Automatizado | `api.feature` `@TC-031` |
+| TC-032 | API      | Consultar os dados de uma conta pelo e-mail | Funcional | Média | Automatizado | `api.feature` `@TC-032` |
+| TC-033 | API      | Atualizar os dados de uma conta | Funcional | Média | Automatizado | `api.feature` `@TC-033` |
+| TC-034 | API      | Tentar criar uma conta com um e-mail já cadastrado | Negativo | Média | Automatizado | `api.feature` `@TC-034` |
 
 ## Legenda
 
