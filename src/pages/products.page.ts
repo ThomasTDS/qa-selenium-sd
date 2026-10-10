@@ -40,8 +40,12 @@ export class ProductsPage extends BasePage {
     await this.driver.wait(until.elementIsVisible(modal), 5000);
   }
 
+  // Espera o modal sumir: se ele continuasse visível, o próximo addProductToCart()
+  // acharia o modal antigo e seguiria antes de o novo item entrar no carrinho.
   async continueShopping(): Promise<void> {
     await this.click(CONTINUE_SHOPPING_BUTTON);
+    const modal = await this.find(CART_MODAL);
+    await this.driver.wait(until.elementIsNotVisible(modal), 5000);
   }
 
   async search(term: string): Promise<void> {
