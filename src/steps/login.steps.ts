@@ -34,3 +34,16 @@ Then(
     assert.equal(message, expectedMessage);
   },
 );
+
+Then(
+  'devo ver que estou logado como {string}',
+  async function (this: CustomWorld, expectedName: string) {
+    const username = await this.homePage.getLoggedInUsername();
+    assert.equal(username, expectedName);
+  },
+);
+
+Then('não devo estar logado no site', async function (this: CustomWorld) {
+  const isLoggedOut = await this.homePage.isLoggedOut();
+  assert.equal(isLoggedOut, true);
+});
