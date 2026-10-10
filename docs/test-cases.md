@@ -20,6 +20,8 @@ Cada test case referencia o `.feature` correspondente via tag (`@TC-XXX`) para r
 | TC-014 | Produtos | Buscar um produto pelo nome                                         | Funcional | Alta       | Automatizado | `products.feature` `@TC-014`                   |
 | TC-015 | Produtos | Buscar um produto inexistente                                       | Negativo  | Média      | Automatizado | `products.feature` `@TC-015`                   |
 | TC-016 | Produtos | Ver os detalhes de um produto                                       | Funcional | Média      | Automatizado | `products.feature` `@TC-016`                   |
+| TC-017 | Carrinho | Adicionar um produto com quantidade maior que 1                     | Funcional | Alta       | Automatizado | `cart.feature` `@TC-017`                       |
+| TC-018 | Carrinho | Adicionar o mesmo produto duas vezes soma as quantidades            | Funcional | Média      | Automatizado | `cart.feature` `@TC-018`                       |
 
 ## Legenda
 
