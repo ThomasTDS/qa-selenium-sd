@@ -11,6 +11,17 @@ function cartRow(productName: string): By {
   return By.xpath(`//tr[td[@class="cart_description"]//a[text()="${productName}"]]`);
 }
 
+function cartRowCell(productName: string, cellClass: string): By {
+  return By.xpath(
+    `//tr[td[@class="cart_description"]//a[text()="${productName}"]]/td[@class="${cellClass}"]`,
+  );
+}
+
+// O carrinho mostra valores como "Rs. 500".
+function parsePrice(text: string): number {
+  return Number(text.replace(/[^0-9]/g, ''));
+}
+
 function cartRowDeleteButton(productName: string): By {
   return By.xpath(
     `//tr[td[@class="cart_description"]//a[text()="${productName}"]]//a[contains(@class,"cart_quantity_delete")]`,
@@ -38,6 +49,18 @@ export class CartPage extends BasePage {
     const row = await this.find(cartRow(productName));
     await this.click(cartRowDeleteButton(productName));
     await this.driver.wait(until.stalenessOf(row), 5000);
+  }
+
+  async getProductPrice(productName: string): Promise<number> {
+    return parsePrice(await this.getText(cartRowCell(productName, 'cart_price')));
+  }
+
+  async getProductQuantity(productName: string): Promise<number> {
+    return Number(await this.getText(cartRowCell(productName, 'cart_quantity')));
+  }
+
+  async getProductTotal(productName: string): Promise<number> {
+    return parsePrice(await this.getText(cartRowCell(productName, 'cart_total')));
   }
 
   async proceedToCheckout(): Promise<void> {
