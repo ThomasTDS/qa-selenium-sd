@@ -17,6 +17,9 @@ Cada test case referencia o `.feature` correspondente via tag (`@TC-XXX`) para r
 | TC-011 | Cadastro | Tentar cadastrar sem preencher campo obrigatório (7 variações)      | Negativo  | Média      | Automatizado | `signup.feature` `@TC-011` (Scenario Outline)  |
 | TC-012 | Login    | Fazer login com credenciais válidas                                 | Funcional | Crítica    | Automatizado | `login.feature` `@TC-012` `@smoke`             |
 | TC-013 | Login    | Sair da conta                                                       | Funcional | Média      | Automatizado | `login.feature` `@TC-013`                      |
+| TC-014 | Produtos | Buscar um produto pelo nome                                         | Funcional | Alta       | Automatizado | `products.feature` `@TC-014`                   |
+| TC-015 | Produtos | Buscar um produto inexistente                                       | Negativo  | Média      | Automatizado | `products.feature` `@TC-015`                   |
+| TC-016 | Produtos | Ver os detalhes de um produto                                       | Funcional | Média      | Automatizado | `products.feature` `@TC-016`                   |
 
 ## Legenda
 
