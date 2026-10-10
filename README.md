@@ -12,7 +12,7 @@ Site alvo: [Automation Exercise](https://automationexercise.com)
 
 - Login (formulários exibidos, login com sucesso, tentativa de login inválida, logout)
 - Produtos (busca por nome, busca sem resultados, detalhes do produto)
-- Carrinho (adicionar produto, remover produto, carrinho vazio)
+- Carrinho (adicionar produto, remover produto, carrinho vazio, quantidade e total por item, soma ao adicionar o mesmo produto de novo)
 - Checkout sem estar logado (bloqueio esperado)
 - Cadastro de usuário (criação e exclusão de conta, e-mail já existente, e 7 campos obrigatórios em branco via `Scenario Outline`)
 - Checkout completo estando logado (carrinho → checkout → pagamento → confirmação do pedido)
