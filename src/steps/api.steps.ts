@@ -1,13 +1,7 @@
 import { DataTable, Then, When } from '@cucumber/cucumber';
 import { strict as assert } from 'node:assert';
 import { ApiResponse, apiRequest, createAccount, updateAccount } from '../support/api-client';
-import { TestAccount } from '../support/test-data';
 import { CustomWorld } from '../support/world';
-
-function createdAccount(world: CustomWorld): TestAccount {
-  assert.ok(world.testAccount, 'Nenhuma conta foi criada neste cenário');
-  return world.testAccount;
-}
 
 function lastResponse(world: CustomWorld): ApiResponse {
   assert.ok(world.apiResponse, 'Nenhuma requisição foi enviada neste cenário');
@@ -35,33 +29,33 @@ When(
 );
 
 When('eu verifico o login da conta que criei pela API', async function (this: CustomWorld) {
-  const { email, password } = createdAccount(this);
+  const { email, password } = this.getTestAccount();
   this.apiResponse = await apiRequest('POST', '/verifyLogin', { email, password });
 });
 
 When(
   'eu verifico o login da conta que criei com a senha {string}',
   async function (this: CustomWorld, password: string) {
-    const { email } = createdAccount(this);
+    const { email } = this.getTestAccount();
     this.apiResponse = await apiRequest('POST', '/verifyLogin', { email, password });
   },
 );
 
 When('eu consulto os dados da conta que criei pela API', async function (this: CustomWorld) {
-  const { email } = createdAccount(this);
+  const { email } = this.getTestAccount();
   this.apiResponse = await apiRequest('GET', '/getUserDetailByEmail', { email });
 });
 
 When(
   'eu atualizo a cidade da conta que criei para {string}',
   async function (this: CustomWorld, city: string) {
-    const account = createdAccount(this);
+    const account = this.getTestAccount();
     this.apiResponse = await updateAccount({ ...account, city });
   },
 );
 
 When('eu tento criar outra conta com o mesmo e-mail', async function (this: CustomWorld) {
-  this.apiResponse = await createAccount(createdAccount(this));
+  this.apiResponse = await createAccount(this.getTestAccount());
 });
 
 // A API sempre responde HTTP 200; o código que importa é o `responseCode` do corpo.
@@ -109,6 +103,6 @@ Then(
   async function (this: CustomWorld, key: string) {
     const user = lastResponse(this).user as Record<string, unknown> | undefined;
     assert.ok(user, 'A resposta não tem o campo "user"');
-    assert.equal(user[key], createdAccount(this).email);
+    assert.equal(user[key], this.getTestAccount().email);
   },
 );
