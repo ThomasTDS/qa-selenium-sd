@@ -29,7 +29,7 @@ Cada cenário é identificado e rastreável via tag `@TC-XXX`, listados em [`doc
 
 ```
 src/
-├── config/     # configuração do WebDriver (browser, headless, timeouts)
+├── config/     # variáveis de ambiente (env.ts) e criação do WebDriver
 ├── pages/      # page objects
 ├── features/   # especificações em Gherkin (.feature)
 ├── steps/      # step definitions
@@ -78,6 +78,8 @@ A imagem já vem com o Google Chrome instalado e as variáveis `BROWSER=chrome`/
 | `BASE_URL` | `https://automationexercise.com` | URL base da aplicação sob teste     |
 | `BROWSER`  | `chrome`                         | `chrome` ou `edge`                  |
 | `HEADLESS` | `false`                          | `true` para rodar sem interface     |
+
+Todas as variáveis são lidas num só lugar, [`src/config/env.ts`](src/config/env.ts), que também carrega o `.env`. O resto do código importa `env` em vez de ler `process.env` diretamente.
 
 ## Qualidade de código
 

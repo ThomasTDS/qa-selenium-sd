@@ -1,8 +1,7 @@
 import { By, WebDriver, until } from 'selenium-webdriver';
+import { env } from '../config/env';
 import { ContactMessage } from '../support/test-data';
 import { BasePage } from './base.page';
-
-const BASE_URL = process.env.BASE_URL ?? 'https://automationexercise.com';
 
 const NAME_INPUT = By.css('input[data-qa="name"]');
 const EMAIL_INPUT = By.css('input[data-qa="email"]');
@@ -18,7 +17,7 @@ export class ContactPage extends BasePage {
   }
 
   async goto(): Promise<void> {
-    await this.open(`${BASE_URL}/contact_us`);
+    await this.open(`${env.baseUrl}/contact_us`);
   }
 
   async fill(message: ContactMessage): Promise<void> {

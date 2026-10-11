@@ -1,6 +1,7 @@
 import { Builder, WebDriver } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
 import edge from 'selenium-webdriver/edge';
+import { env } from './env';
 
 const BLOCKED_AD_URL_PATTERNS = [
   '*doubleclick.net*',
@@ -14,8 +15,7 @@ const BLOCKED_AD_URL_PATTERNS = [
 const CI_HARDENING_ARGS = ['--no-sandbox', '--disable-dev-shm-usage'];
 
 export async function createDriver(): Promise<WebDriver> {
-  const browser = process.env.BROWSER ?? 'chrome';
-  const headless = process.env.HEADLESS === 'true';
+  const { browser, headless } = env;
   const commonArgs = [...CI_HARDENING_ARGS, '--window-size=1366,768'];
 
   let driver: WebDriver;
