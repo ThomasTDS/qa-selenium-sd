@@ -47,6 +47,21 @@ export class CustomWorld extends World {
     this.contactPage = new ContactPage(this.driver);
     this.newsletter = new NewsletterComponent(this.driver);
   }
+
+  /**
+   * Devolve a conta criada por um passo anterior do cenário. Se nenhum passo
+   * criou a conta, falha com uma mensagem que aponta o problema no Gherkin, em
+   * vez de estourar mais adiante com um "Cannot read properties of undefined".
+   */
+  getTestAccount(): TestAccount {
+    if (!this.testAccount) {
+      throw new Error(
+        'Nenhuma conta de teste foi criada neste cenário. Adicione antes um passo que ' +
+          'cria a conta, como "que tenho uma conta cadastrada".',
+      );
+    }
+    return this.testAccount;
+  }
 }
 
 setWorldConstructor(CustomWorld);

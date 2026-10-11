@@ -22,7 +22,7 @@ When('eu me cadastro com um novo nome e email', async function (this: CustomWorl
 When(
   'eu preencho as informações da conta e confirmo o cadastro',
   async function (this: CustomWorld) {
-    await this.signupPage.fillAccountInformation(this.testAccount!);
+    await this.signupPage.fillAccountInformation(this.getTestAccount());
     await this.signupPage.submit();
   },
 );
@@ -78,7 +78,8 @@ When('eu saio da minha conta', async function (this: CustomWorld) {
 });
 
 When('eu me cadastro novamente com o mesmo nome e email', async function (this: CustomWorld) {
-  await this.loginPage.signup(this.testAccount!.name, this.testAccount!.email);
+  const { name, email } = this.getTestAccount();
+  await this.loginPage.signup(name, email);
 });
 
 Then(
@@ -90,14 +91,15 @@ Then(
 );
 
 When('eu faço login com a conta que criei', async function (this: CustomWorld) {
-  await this.loginPage.login(this.testAccount!.email, this.testAccount!.password);
+  const { email, password } = this.getTestAccount();
+  await this.loginPage.login(email, password);
 });
 
 When(
   'eu tento confirmar o cadastro sem preencher o campo {string}',
   async function (this: CustomWorld, fieldLabel: string) {
     const field = REQUIRED_FIELD_BY_LABEL[fieldLabel];
-    const incompleteAccount = { ...this.testAccount!, [field]: '' };
+    const incompleteAccount = { ...this.getTestAccount(), [field]: '' };
     await this.signupPage.fillAccountInformation(incompleteAccount);
     await this.signupPage.submit();
   },
