@@ -1,7 +1,6 @@
 import { By, WebDriver } from 'selenium-webdriver';
+import { env } from '../config/env';
 import { BasePage } from './base.page';
-
-const BASE_URL = process.env.BASE_URL ?? 'https://automationexercise.com';
 
 const SIGNUP_LOGIN_LINK = By.css('a[href="/login"]');
 const LOGOUT_LINK = By.css('a[href="/logout"]');
@@ -13,7 +12,7 @@ export class HomePage extends BasePage {
   }
 
   async goto(): Promise<void> {
-    await this.open(BASE_URL);
+    await this.open(env.baseUrl);
   }
 
   async goToLoginPage(): Promise<void> {

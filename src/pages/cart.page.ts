@@ -1,7 +1,6 @@
 import { By, WebDriver, until } from 'selenium-webdriver';
+import { env } from '../config/env';
 import { BasePage } from './base.page';
-
-const BASE_URL = process.env.BASE_URL ?? 'https://automationexercise.com';
 
 const EMPTY_CART_MESSAGE = By.css('#empty_cart');
 const PROCEED_TO_CHECKOUT_BUTTON = By.xpath('//a[contains(text(),"Proceed To Checkout")]');
@@ -34,7 +33,7 @@ export class CartPage extends BasePage {
   }
 
   async goto(): Promise<void> {
-    await this.open(`${BASE_URL}/view_cart`);
+    await this.open(`${env.baseUrl}/view_cart`);
   }
 
   async hasProduct(productName: string): Promise<boolean> {

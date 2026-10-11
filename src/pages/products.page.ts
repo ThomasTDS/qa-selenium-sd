@@ -1,7 +1,6 @@
 import { By, WebDriver, until } from 'selenium-webdriver';
+import { env } from '../config/env';
 import { BasePage } from './base.page';
-
-const BASE_URL = process.env.BASE_URL ?? 'https://automationexercise.com';
 
 const CART_MODAL = By.css('#cartModal');
 const CONTINUE_SHOPPING_BUTTON = By.css('#cartModal .close-modal');
@@ -31,7 +30,7 @@ export class ProductsPage extends BasePage {
   }
 
   async goto(): Promise<void> {
-    await this.open(`${BASE_URL}/products`);
+    await this.open(`${env.baseUrl}/products`);
   }
 
   async addProductToCart(productName: string): Promise<void> {

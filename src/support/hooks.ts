@@ -1,10 +1,7 @@
 import { After, Before, Status, setDefaultTimeout } from '@cucumber/cucumber';
-import * as dotenv from 'dotenv';
 import { createDriver } from '../config/driver.factory';
 import { deleteAccount } from './api-client';
 import { CustomWorld } from './world';
-
-dotenv.config();
 
 setDefaultTimeout(30 * 1000);
 

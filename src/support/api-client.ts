@@ -1,6 +1,5 @@
+import { env } from '../config/env';
 import { TestAccount } from './test-data';
-
-const BASE_URL = process.env.BASE_URL ?? 'https://automationexercise.com';
 
 const REQUEST_TIMEOUT = 10000;
 
@@ -28,7 +27,7 @@ export async function apiRequest(
   const query = new URLSearchParams(params);
   const isGet = method === 'GET';
   const hasQuery = isGet && Object.keys(params).length > 0;
-  const url = `${BASE_URL}/api${path}${hasQuery ? `?${query}` : ''}`;
+  const url = `${env.baseUrl}/api${path}${hasQuery ? `?${query}` : ''}`;
   const response = await fetch(url, {
     method,
     body: isGet ? undefined : query,
