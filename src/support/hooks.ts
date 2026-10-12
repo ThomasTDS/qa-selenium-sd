@@ -1,6 +1,7 @@
 import { After, Before, Status, setDefaultTimeout } from '@cucumber/cucumber';
 import { createDriver } from '../config/driver.factory';
 import { deleteAccount } from './api-client';
+import { attachFailureDiagnostics } from './diagnostics';
 import { CustomWorld } from './world';
 
 setDefaultTimeout(30 * 1000);
@@ -18,15 +19,15 @@ After(async function (this: CustomWorld, { result }) {
     return;
   }
   if (result?.status === Status.FAILED) {
-    try {
-      const screenshot = await this.driver.takeScreenshot();
-      await this.attach(screenshot, 'base64:image/png');
-    } catch {
-      // Se a sessão do browser já estiver travada, a captura de tela também trava.
-      // Não deixamos isso impedir a tentativa de encerrar o driver logo abaixo.
-    }
+    await attachFailureDiagnostics(this);
   }
-  await this.driver.quit();
+  try {
+    await this.driver.quit();
+  } catch (error) {
+    // Se o browser já tinha morrido, o quit() também falha; isso não deve
+    // aparecer no relatório como um segundo erro do cenário.
+    this.log(`Não foi possível encerrar o browser: ${String(error)}`);
+  }
 });
 
 // Exclui via API a conta criada pelo cenário, mesmo que ele tenha falhado antes

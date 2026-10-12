@@ -1,4 +1,4 @@
-import { Builder, WebDriver } from 'selenium-webdriver';
+import { Builder, WebDriver, logging } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome';
 import edge from 'selenium-webdriver/edge';
 import { env } from './env';
@@ -14,6 +14,14 @@ const BLOCKED_AD_URL_PATTERNS = [
 // onde o sandbox padrão do navegador não tem permissão para inicializar.
 const CI_HARDENING_ARGS = ['--no-sandbox', '--disable-dev-shm-usage'];
 
+// Guarda os logs do console do browser para anexá-los ao relatório quando um
+// cenário falha (ver src/support/diagnostics.ts).
+function browserLoggingPrefs(): logging.Preferences {
+  const prefs = new logging.Preferences();
+  prefs.setLevel(logging.Type.BROWSER, logging.Level.ALL);
+  return prefs;
+}
+
 export async function createDriver(): Promise<WebDriver> {
   const { browser, headless } = env;
   const commonArgs = [...CI_HARDENING_ARGS, '--window-size=1366,768'];
@@ -25,6 +33,7 @@ export async function createDriver(): Promise<WebDriver> {
       edgeOptions.addArguments('--headless=new');
     }
     edgeOptions.addArguments(...commonArgs);
+    edgeOptions.setLoggingPrefs(browserLoggingPrefs());
     driver = await new Builder().forBrowser('MicrosoftEdge').setEdgeOptions(edgeOptions).build();
   } else {
     const chromeOptions = new chrome.Options();
@@ -32,6 +41,7 @@ export async function createDriver(): Promise<WebDriver> {
       chromeOptions.addArguments('--headless=new');
     }
     chromeOptions.addArguments(...commonArgs);
+    chromeOptions.setLoggingPrefs(browserLoggingPrefs());
     driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
   }
 

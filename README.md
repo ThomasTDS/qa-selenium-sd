@@ -56,7 +56,7 @@ npm run test:headless # em modo headless
 npm run test:api      # só os testes de API, sem browser
 ```
 
-Relatórios são gerados em `reports/` (HTML e JSON).
+Relatórios são gerados em `reports/` (HTML e JSON). Quando um cenário de interface falha, o relatório recebe a screenshot, a URL, o HTML da página (`pagina.html`) e os logs do console do browser (`console.log`) do momento da falha, então uma falha do CI pode ser investigada só pelo relatório.
 
 A suíte roda em 2 workers em paralelo (configurado em `cucumber.js`), reduzindo o tempo total de execução em quase a metade sem abrir muitas sessões de browser simultâneas.
 
