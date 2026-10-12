@@ -107,7 +107,9 @@ O [`CHANGELOG.md`](CHANGELOG.md) é gerado a partir dos commits (`npm run change
 
 Todo push e pull request para `master` dispara o workflow [`e2e.yml`](.github/workflows/e2e.yml): um job `quality` roda lint e type-check e, se passar, um job `e2e` roda a suíte completa em modo headless no Chrome, publicando o relatório como artefato do job. O Edge continua suportado para execução local (veja `BROWSER` acima), mas foi removido da matrix de CI por instabilidade recorrente no runner — detalhes na Issue de bug report correspondente.
 
-Em todo push direto para `master` (não em pull requests), um terceiro job publica o relatório HTML mais recente no GitHub Pages: [thomastds.github.io/qa-selenium-sd](https://thomastds.github.io/qa-selenium-sd/).
+O workflow também roda todo dia às 06:17 (horário de Brasília), mesmo sem commits novos. O site alvo é de terceiros e pode mudar a qualquer momento, e a execução diária mostra quando uma mudança dele quebra algum fluxo, sem esperar o próximo PR. Se ela falhar, o GitHub avisa por e-mail. O GitHub desativa execuções agendadas de repositórios públicos sem atividade há 60 dias. Se isso acontecer, é só reativar o workflow na aba Actions.
+
+Em todo push direto para `master` e em toda execução diária (não em pull requests), um terceiro job publica o relatório HTML mais recente no GitHub Pages: [thomastds.github.io/qa-selenium-sd](https://thomastds.github.io/qa-selenium-sd/).
 
 Um job `docker` (disparado manualmente via `workflow_dispatch`, não em todo push) builda a imagem e roda a suíte dentro do container, validando que o `Dockerfile` continua funcionando.
 
