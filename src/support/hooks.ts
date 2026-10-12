@@ -1,7 +1,7 @@
 import { After, Before, Status, setDefaultTimeout } from '@cucumber/cucumber';
 import { createDriver } from '../config/driver.factory';
 import { deleteAccount } from './api-client';
-import { attachFailureDiagnostics } from './diagnostics';
+import { attachFailureDiagnostics, noteRetriedScenario } from './diagnostics';
 import { CustomWorld } from './world';
 
 setDefaultTimeout(30 * 1000);
@@ -47,4 +47,10 @@ After(async function (this: CustomWorld) {
     // Uma falha na limpeza não deve mudar o resultado do cenário, só ficar registrada.
     this.log(`Limpeza: erro ao excluir a conta ${email}: ${String(error)}`);
   }
+});
+
+// Vale para todos os cenários, inclusive @api: marca no relatório os que só
+// passaram depois do retry.
+After(function (this: CustomWorld, params) {
+  noteRetriedScenario(this, params);
 });

@@ -1,3 +1,4 @@
+import { ITestCaseHookParameter, Status } from '@cucumber/cucumber';
 import { logging } from 'selenium-webdriver';
 import { CustomWorld } from './world';
 
@@ -38,6 +39,32 @@ export async function attachFailureDiagnostics(world: CustomWorld): Promise<void
       fileName: 'console.log',
     });
   });
+}
+
+// Falhas por cenário (pickle.id) que vão ser repetidas pelo retry. O retry roda
+// no mesmo worker, então um contador em memória basta.
+const failedAttempts = new Map<string, number>();
+
+/**
+ * Anota no relatório quando um cenário só passou depois do retry. Sem isso, ele
+ * aparece como "passed" como qualquer outro, e a instabilidade passa despercebida.
+ */
+export function noteRetriedScenario(
+  world: CustomWorld,
+  { pickle, result, willBeRetried }: ITestCaseHookParameter,
+): void {
+  if (willBeRetried) {
+    failedAttempts.set(pickle.id, (failedAttempts.get(pickle.id) ?? 0) + 1);
+    return;
+  }
+  const failures = failedAttempts.get(pickle.id);
+  failedAttempts.delete(pickle.id);
+  if (failures && result?.status === Status.PASSED) {
+    world.log(
+      `Cenário instável: passou na tentativa ${failures + 1}, depois de falhar ${failures} ` +
+        `${failures === 1 ? 'vez' : 'vezes'}.`,
+    );
+  }
 }
 
 // Uma sessão de browser travada pode deixar uma chamada pendurada para sempre.

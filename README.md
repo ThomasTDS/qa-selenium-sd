@@ -58,6 +58,8 @@ npm run test:api      # só os testes de API, sem browser
 
 Relatórios são gerados em `reports/` (HTML e JSON). Quando um cenário de interface falha, o relatório recebe a screenshot, a URL, o HTML da página (`pagina.html`) e os logs do console do browser (`console.log`) do momento da falha, então uma falha do CI pode ser investigada só pelo relatório.
 
+Cenários que falham e só passam depois do retry aparecem no resumo do Cucumber como "passed". Para a instabilidade não passar despercebida, eles recebem uma nota "Cenário instável" no relatório HTML, e `npm run report:flaky` gera uma tabela com todos eles em `reports/cenarios-instaveis.md`. No CI, essa tabela aparece no resumo do job.
+
 A suíte roda em 2 workers em paralelo (configurado em `cucumber.js`), reduzindo o tempo total de execução em quase a metade sem abrir muitas sessões de browser simultâneas.
 
 ### Rodando via Docker
