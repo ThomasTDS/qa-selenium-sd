@@ -61,6 +61,11 @@ jobs:
       - name: Run E2E tests
         run: npm test
 
+      # Lista os cenários que só passaram depois do retry no resumo do job.
+      - name: Report flaky scenarios
+        if: always()
+        run: npm run report:flaky
+
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v7

@@ -7,6 +7,8 @@ module.exports = {
       'progress-bar',
       'html:reports/cucumber-report.html',
       'json:reports/cucumber-report.json',
+      // Registra cada tentativa de cada cenário; é a fonte do npm run report:flaky.
+      'message:reports/cucumber-messages.ndjson',
     ],
     publishQuiet: true,
     // O site alvo fica atrás do Cloudflare, que ocasionalmente trata o IP de
