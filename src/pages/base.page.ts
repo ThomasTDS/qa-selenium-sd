@@ -1,4 +1,5 @@
 import { By, WebDriver, WebElement, until } from 'selenium-webdriver';
+import { Select } from 'selenium-webdriver/lib/select';
 
 const DEFAULT_TIMEOUT = 10000;
 
@@ -27,9 +28,12 @@ export abstract class BasePage {
     await element.sendKeys(text);
   }
 
+  // Escolhe a opção pelo texto exato. Digitar no <select> com sendKeys depende da
+  // busca por digitação do browser e, se o texto não bate com nenhuma opção,
+  // deixa outra selecionada sem erro; aqui uma opção inexistente falha na hora.
   protected async select(locator: By, visibleText: string): Promise<void> {
     const element = await this.find(locator);
-    await element.sendKeys(visibleText);
+    await new Select(element).selectByVisibleText(visibleText);
   }
 
   protected async getText(locator: By): Promise<string> {
