@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [master]
   workflow_dispatch:
+  # Roda a suíte todo dia, mesmo sem commits, para detectar quando o site alvo
+  # muda e quebra algum fluxo. 09:17 UTC = 06:17 em Brasília; o minuto quebrado
+  # evita a virada da hora, quando a fila de agendamentos do GitHub atrasa.
+  schedule:
+    - cron: '17 9 * * *'
 
 jobs:
   quality:
@@ -93,7 +98,7 @@ jobs:
 
   publish-report:
     needs: e2e
-    if: always() && github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    if: always() && github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
     runs-on: ubuntu-latest
     permissions:
       pages: write
