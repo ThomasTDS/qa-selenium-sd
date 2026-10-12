@@ -44,4 +44,4 @@ Cada test case referencia o `.feature` correspondente via tag (`@TC-XXX`) para r
 - **Tipo**: `Funcional` (caminho feliz) ou `Negativo` (validação de bloqueio/erro esperado).
 - **Prioridade**: importância do caso para o negócio — `Crítica` > `Alta` > `Média` > `Baixa`. Não confundir com a prioridade (P0–P3) usada nos [bug reports](../.github/ISSUE_TEMPLATE/bug_report.md), que mede urgência de correção de um defeito, não importância de um caso de teste.
 - **Automação**: `Automatizado`, `Manual` ou `Planejado` (caso ainda não implementado, mas já identificado como necessário).
-- **`@smoke`**: cenários ponta-a-ponta críticos, candidatos a uma suíte rápida (`cucumber-js --tags @smoke`) separada da suíte de regressão completa.
+- **`@smoke`**: cenários ponta-a-ponta críticos, que formam uma suíte rápida (`npm run test:smoke`) separada da suíte de regressão completa.

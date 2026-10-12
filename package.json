@@ -13,6 +13,7 @@
   "scripts": {
     "test": "cucumber-js",
     "test:headless": "cross-env HEADLESS=true cucumber-js",
+    "test:smoke": "cucumber-js --tags @smoke",
     "test:api": "cucumber-js --tags @api",
     "report:flaky": "ts-node src/tools/flaky-report.ts",
     "lint": "eslint src",
