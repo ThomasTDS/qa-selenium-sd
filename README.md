@@ -1,5 +1,7 @@
 # QA Selenium SD
 
+**Português** · [English](README.en.md)
+
 [![E2E Tests](https://github.com/ThomasTDS/qa-selenium-sd/actions/workflows/e2e.yml/badge.svg)](https://github.com/ThomasTDS/qa-selenium-sd/actions/workflows/e2e.yml)
 
 [Último relatório de testes publicado](https://thomastds.github.io/qa-selenium-sd/)
